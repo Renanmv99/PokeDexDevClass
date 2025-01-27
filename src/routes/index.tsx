@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider as RRDRouterProvider } from "react-router-dom";
-import { Root } from "./Root.element";
-import {  rootloader } from "./Root.loader";
+import { Root } from "./Home.page";
+import {  rootloader } from "./HomePage.loader";
+import { pokemonDetailsPageLoader } from "./PokemonDetailsPage.loader";
+import { PokemonDetailsPage } from "./PokemonDetails.page";
 
 const router = createBrowserRouter([
     {
@@ -10,7 +12,8 @@ const router = createBrowserRouter([
     },
     {
         path: "/pokemon/:id",
-        element:<>Pokemon de numero X</>
+        element:<PokemonDetailsPage />,
+        loader: pokemonDetailsPageLoader
     }
 ])
 

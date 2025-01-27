@@ -7,6 +7,9 @@ type Props = {
 }
 
 export const PokemonCard = (props: Props) =>{
+
+    const formattedName = props.pokemonName.slice(1).toLowerCase()
+
     return(
         <Card key={props.pokemonName} sx={{height: "100%", display: "flex"}}>
         <CardActionArea
@@ -26,7 +29,7 @@ export const PokemonCard = (props: Props) =>{
             </CardMedia>
             <CardContent>
                 <Typography>
-                    {props.pokemonNumber}. {props.pokemonName.charAt(0).toUpperCase() + props.pokemonName.slice(1).toLowerCase()}
+                    {props.pokemonNumber}. {props.pokemonName.charAt(0).toUpperCase() + formattedName}
                 </Typography>
             </CardContent>
         </CardActionArea>
