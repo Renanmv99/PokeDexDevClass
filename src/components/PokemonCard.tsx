@@ -26,7 +26,7 @@ export const PokemonCard = (props: Props) =>{
             </CardMedia>
             <CardContent>
                 <Typography>
-                    {props.pokemonNumber}. {props.pokemonName}
+                    {props.pokemonNumber}. {props.pokemonName.charAt(0).toUpperCase() + props.pokemonName.slice(1).toLowerCase()}
                 </Typography>
             </CardContent>
         </CardActionArea>
