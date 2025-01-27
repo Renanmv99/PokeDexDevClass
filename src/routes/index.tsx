@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider as RRDRouterProvider } from "react-router-dom";
-import { Header } from "../components/Header"
+import { Root } from "./Root.element";
+import {  rootloader } from "./Root.loader";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Header title = "Pokedex"/>
+        element: <Root/>,
+        loader: rootloader
     },
     {
         path: "/pokemon/:id",

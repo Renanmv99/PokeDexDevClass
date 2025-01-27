@@ -8,7 +8,7 @@ type Props = {
 
 export const PokemonCard = (props: Props) =>{
     return(
-        <Card key={props.pokemonName} sx={{height: "100%", display: "flex"}}>[]
+        <Card key={props.pokemonName} sx={{height: "100%", display: "flex"}}>
         <CardActionArea
             sx={{
                 display: "flex",
