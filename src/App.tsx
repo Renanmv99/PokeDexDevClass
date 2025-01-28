@@ -6,8 +6,8 @@ function App() {
 
   return (
     <>
-     <CssBaseline />
      <ThemeProvider>
+     <CssBaseline />
         <RouterProvider />
      </ThemeProvider>
     </>

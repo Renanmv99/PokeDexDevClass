@@ -1,65 +1,53 @@
-import { createTheme, ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
-import React, { useEffect } from "react";
-
-const darkMode = true;
+import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material";
+import React, { createContext, useState, useContext, useMemo } from "react";
 
 const lightTheme = createTheme({
-    typography: {
-        fontFamily: ["'Press Start 2P'", "'Roboto'", "sans-serif"].join(","),
-    },
-    palette: {
-        mode: 'light',
-        primary: {
-            main: '#1976d2',
-        },
-        secondary: {
-            main: '#ff4081', 
-        },
-        background: {
-            default: '#ffffff',
-            paper: '#f5f5f5',
-        },
-        text: {
-            primary: '#000000',
-            secondary: '#757575',
-        },
-    },
+  palette: {
+    mode: "light",
+    primary: { main: "#1976d2" },
+    error: { main: "#d32f2f" },
+  },
+  typography: {
+    fontFamily: ["'Press Start 2P'", "'Roboto'", "sans-serif"].join(","),
+  },
 });
 
 const darkTheme = createTheme({
-    typography: {
-        fontFamily: ["'Press Start 2P'", "'Roboto'", "sans-serif"].join(","),
-    },
-    palette: {
-        mode: 'dark',
-        primary: {
-            main: '#90caf9',
-        },
-        secondary: {
-            main: '#ff4081',
-        },
-        background: {
-            default: '#121212',
-            paper: '#1e1e1e',
-        },
-        text: {
-            primary: '#ffffff',
-            secondary: '#bdbdbd',
-        },
-    },
+  palette: {
+    mode: "dark",
+    primary: { main: "#90caf9" },
+    error: { main: "#f44336" },
+  },
+  typography: {
+    fontFamily: ["'Press Start 2P'", "'Roboto'", "sans-serif"].join(","),
+  },
 });
 
-const theme = darkMode ? darkTheme : lightTheme;
+type ThemeContextType = {
+  toggleTheme: () => void;
+  isDarkMode: boolean;
+};
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+};
 
 export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
-    useEffect(() => {
-        document.body.style.backgroundColor = darkMode ? '#121212' : '#ffffff';
-    }, []);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-    return (
-        <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
-        </MuiThemeProvider>
-    );
+  const toggleTheme = () => setIsDarkMode((prev) => !prev);
+
+  const theme = useMemo(() => (isDarkMode ? darkTheme : lightTheme), [isDarkMode]);
+
+  return (
+    <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>
+      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+    </ThemeContext.Provider>
+  );
 };
