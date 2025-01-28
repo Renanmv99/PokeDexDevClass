@@ -14,7 +14,7 @@ export const PokemonCard = (props: Props) =>{
     const bgColor = typeColors[props.pokemonType] || typeColors.default;
 
     return(
-        <Card key={props.pokemonName} sx={{height: "100%", display: "flex"}}>
+        <Card key={props.pokemonName} sx={{height: "100%", display: "flex", color: "white"}}>
         <CardActionArea
             sx={{
                 display: "flex",
