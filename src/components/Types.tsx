@@ -1,7 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { List, ListItem } from "./List";
 import Chip from "@mui/material/Chip";
-import { Pokemon } from "../types";
+import { Pokemon, typeColors } from "../types";
 
 interface Props {
     pokemon: Pokemon
@@ -15,7 +15,9 @@ export function Types(params: Props) {
         <List>
             {params.pokemon.types.map((item) => (
                 <ListItem key={item.type.name}>
-                    <Chip label={item.type.name} color="secondary" />
+                    <Chip label={item.type.name} color="secondary" style={{
+                                backgroundColor: typeColors[item.type.name] || typeColors.default    
+                            }}/>
                 </ListItem>
             ))}
         </List>
